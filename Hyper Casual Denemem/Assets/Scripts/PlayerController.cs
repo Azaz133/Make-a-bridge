@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (levelController.Current == null || !levelController.Current.gameActive)
+        if (LevelController.Current == null || !LevelController.Current.gameActive)
         {
             return;
         }
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
                     if(_scoreTimer < 0)
                     {
                         _scoreTimer = 0.3f;
-                        levelController.Current.ChangeScore(1);
+                        LevelController.Current.ChangeScore(1);
                     }
                 }
                 
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
             StopSpawningBridge();
             if (_finished)
             {
-                levelController.Current.FinishGame();
+                LevelController.Current.FinishGame();
             }
         }
         else if (other.tag == "Finish")
@@ -138,14 +138,14 @@ public class PlayerController : MonoBehaviour
         else if(other.tag == "Coin")
         {
             triggerAudioSource.PlayOneShot(coinAudioClip, 0.1f);
-            levelController.Current.ChangeScore(10);
+            LevelController.Current.ChangeScore(10);
             Destroy(other.gameObject);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (levelController.Current.gameActive)
+        if (LevelController.Current.gameActive)
         {
             PlayDropSound();
             IncrementCylinderVolume(-Time.fixedDeltaTime);
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (_finished)
                 {
-                    levelController.Current.FinishGame();
+                    LevelController.Current.FinishGame();
                 }
                 else
                 {
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("dead",true);
         gameObject.layer = 8;
         Camera.main.transform.SetParent(null);
-        levelController.Current.GameOver();
+        LevelController.Current.GameOver();
     }
 
     public void CreateCylinder(float value)

@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class DailyReward : MonoBehaviour
 {
     public bool initialized;
-    public long rewardGiivingTÝmeTicks;
+    public long rewardGivingTimeTicks;
     public GameObject rewardMenu;
     public Text remainingTimeText;
 
 
-    public void InýtializeDailyReward()
+    public void InitializeDailyReward()
     {
         if (PlayerPrefs.HasKey("lastDailyReward"))
         {
-            rewardGiivingTÝmeTicks = long.Parse(PlayerPrefs.GetString("lastDailyReward")) + 864000000000;
+            rewardGivingTimeTicks = long.Parse(PlayerPrefs.GetString("lastDailyReward")) + 864000000000;
             long currentTime = System.DateTime.Now.Ticks;
-            if (currentTime >= rewardGiivingTÝmeTicks)
+            if (currentTime >= rewardGivingTimeTicks)
             {
                 GiveReward();   
             }
@@ -31,20 +31,20 @@ public class DailyReward : MonoBehaviour
 
     public void GiveReward()
     {
-        levelController.Current.GiveMoneyToPLayer(100);
+        LevelController.Current.GiveMoneyToPLayer(100);
         rewardMenu.SetActive(true);
         PlayerPrefs.SetString("lastDailyReward", System.DateTime.Now.Ticks.ToString());
-        rewardGiivingTÝmeTicks = long.Parse(PlayerPrefs.GetString("lastDailyReward")) + 864000000000;
+        rewardGivingTimeTicks = long.Parse(PlayerPrefs.GetString("lastDailyReward")) + 864000000000;
     }
 
     void Update()
     {
         if (initialized)
         {
-            if (levelController.Current.startMenu.activeInHierarchy)
+            if (LevelController.Current.startMenu.activeInHierarchy)
             {
                 long currentTime = System.DateTime.Now.Ticks;
-                long remainingTime = rewardGiivingTÝmeTicks - currentTime;
+                long remainingTime = rewardGivingTimeTicks - currentTime;
                 if(remainingTime <= 0)
                 {
                     GiveReward();

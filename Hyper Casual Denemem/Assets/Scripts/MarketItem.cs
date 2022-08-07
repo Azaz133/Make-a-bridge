@@ -54,7 +54,7 @@ public class MarketItem : MonoBehaviour
             if(money >= price)
             {
                 PlayerController.Current.itemAudioSource.PlayOneShot(PlayerController.Current.buyAudioClip, 0.1f);
-                levelController.Current.GiveMoneyToPLayer(-price);
+                LevelController.Current.GiveMoneyToPLayer(-price);
                 PlayerPrefs.SetInt("item" + itemId.ToString(), 1);
                 buyButton.gameObject.SetActive(false);
                 equipButton.gameObject.SetActive(true);

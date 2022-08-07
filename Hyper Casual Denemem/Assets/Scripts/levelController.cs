@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class levelController : MonoBehaviour
+public class LevelController : MonoBehaviour
 {
-    public static levelController Current;
+    public static LevelController Current;
     public bool gameActive = false;
 
     public GameObject startMenu, gameMenu, gameOverMenu, finishMenu;
@@ -31,7 +31,7 @@ public class levelController : MonoBehaviour
         {
             PlayerController.Current = GameObject.FindObjectOfType<PlayerController>();
             GameObject.FindObjectOfType<MarketController>().InitializeMarketController();   
-            dailyReward.InýtializeDailyReward();
+            dailyReward.InitializeDailyReward();
             currentLevelText.text = (currentLevel + 1).ToString();
             nextLevelText.text = (currentLevel + 2).ToString();
             UpdateMoneyText();
